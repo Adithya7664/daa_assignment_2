@@ -1,0 +1,39 @@
+══════════════════════════════════════════════════════
+Dataset  : email-Enron.txt
+Nodes    : 36692
+Edges    : 183831
+Load time: 0.093 s
+══════════════════════════════════════════════════════
+
+Running Charikar's greedy peeling (edge-density) ...
+Running Greedy++ (5 passes, edge-density) ...
+Running PeelApp (triangle-density peeling approx) ...
+Running CoreExact (triangle-density, Dinic flow) ...
+
+── Results ─────────────────────────────────────────────
+  [Charikar greedy (edge-density, 1/2-approx)]
+    Edge-density     : 37.344144
+    Subgraph size    : 555 vertices
+  [Greedy++ (edge-density, 5 passes)]
+    Edge-density     : 37.344144
+    Subgraph size    : 555 vertices
+  [PeelApp (triangle-density peeling, 1/3-approx)]
+    Triangle-density : 404.451948
+    Subgraph size    : 385 vertices
+  [CoreExact (triangle-density, Dinic flow, exact)]
+    Triangle-density : 404.456186
+    Subgraph size    : 388 vertices
+
+── Execution Time ──────────────────────────────────────
+  Graph load             : 0.093 s
+  Charikar (Alg 1)       : 0.060 s
+  Greedy++ (Alg 2)       : 0.288 s
+  PeelApp triangle       : 0.314 s
+  CoreExact (Alg 4)      : 28.362 s
+  TOTAL                  : 29.115 s
+
+── Space Consumption ───────────────────────────────────
+  RSS before algorithms  : 3 MB
+  RSS after  algorithms  : 164 MB
+  Approx algo memory use : 161 MB
+══════════════════════════════════════════════════════

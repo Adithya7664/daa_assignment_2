@@ -1,15 +1,19 @@
 #!/bin/bash
 
-echo "Compiling"
-g++ -O3 -march=native daa2.cpp -o bc
+SRC="assignment2.cpp"
+EXE="assignment2"
+PASSES=5
+TIMEOUT=10800
 
-echo "Running wiki-Vote"
-./bc Wiki-Vote.txt > output_wiki.txt
+DATASETS=("wiki-Vote.txt" "email-Enron.txt" "as-skitter.txt")
 
-echo "Running email-Enron"
-./bc Email-Enron.txt > output_enron.txt
+g++ -O3 -march=native -std=c++17 -Wall -Wextra "$SRC" -o "$EXE" || exit 1
 
-echo "Running as-skitter"
-./bc as-skitter.txt > output_skitter.txt
-
-echo "Done!"
+for DATASET in "${DATASETS[@]}"
+do
+    OUT_FILE="output_$(basename $DATASET .txt).txt"
+    timeout $TIMEOUT ./$EXE "$DATASET" "$PASSES" 2>&1 | tee "$OUT_FILE"
+    if [ $? -eq 124 ]; then
+        echo "$DATASET NC" | tee -a "$OUT_FILE"
+    fi
+done
